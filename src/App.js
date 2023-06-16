@@ -3,27 +3,51 @@ import Form from "./components/Form/Form.js";
 import useLocalStorageState from "use-local-storage-state";
 import { uid } from "uid";
 import List from "./components/List/List";
+import { useState, useEffect } from "react";
 
 function App() {
-	const [activities, setActivities] = useLocalStorageState("activities", {
-		defaultValue: [],
-	});
+  const [activities, setActivities] = useLocalStorageState("activities", {
+    defaultValue: [],
+  });
 
-	function handleAddActivity(newActivity) {
-		newActivity = { ...newActivity, id: uid() };
-		setActivities([newActivity, ...activities]);
-	}
-	const isGoodWeather = false;
-	const filteredActivities = activities.filter(
-		(activity) => activity.isForGoodWeather === isGoodWeather
-	);
+  function handleAddActivity(newActivity) {
+    newActivity = { ...newActivity, id: uid() };
+    setActivities([newActivity, ...activities]);
+  }
 
-	return (
-		<div className="App">
-			<List activities={filteredActivities} isGoodWeather={isGoodWeather} />
-			<Form onAddActivity={handleAddActivity} />
-		</div>
-	);
+  const [weather, setWeather] = useState();
+
+  useEffect(() => {
+    async function fetchWeather() {
+      try {
+        const response = await fetch(
+          "https://example-apis.vercel.app/api/weather"
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          setWeather(data);
+        } else {
+          console.error("Data error");
+        }
+      } catch {
+        console.error("catch");
+      }
+    }
+    fetchWeather();
+  }, []);
+
+  const isGoodWeather = false;
+  const filteredActivities = activities.filter(
+    (activity) => activity.isForGoodWeather === isGoodWeather
+  );
+
+  return (
+    <div className="App">
+      <List activities={filteredActivities} isGoodWeather={isGoodWeather} />
+      <Form onAddActivity={handleAddActivity} />
+    </div>
+  );
 }
 
 export default App;
