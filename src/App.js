@@ -15,8 +15,10 @@ function App() {
     setActivities([newActivity, ...activities]);
   }
 
-  const [weather, setWeather] = useState();
+  const [weather, setWeather] = useState({});
+  const [isGoodWeather, setIsGoodWeather] = useState(null);
 
+  //const isGoodWeather = false;
   useEffect(() => {
     async function fetchWeather() {
       try {
@@ -27,6 +29,7 @@ function App() {
         if (response.ok) {
           const data = await response.json();
           setWeather(data);
+          setIsGoodWeather(data.isGoodWeather);
         } else {
           console.error("Data error");
         }
@@ -37,7 +40,10 @@ function App() {
     fetchWeather();
   }, []);
 
-  const isGoodWeather = false;
+  //   console.log(weather.isGoodWeather);
+  console.log("isGoodWeather:", isGoodWeather);
+  //   isGoodWeather = weather.isGoodWeather;
+
   const filteredActivities = activities.filter(
     (activity) => activity.isForGoodWeather === isGoodWeather
   );
