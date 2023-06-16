@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Form from "./components/Form/Form.js";
+import useLocalStorageState from "use-local-storage-state";
+import { uid } from "uid";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [activities, setActivities] = useLocalStorageState("activities", {
+		defaultValue: [],
+	});
+
+	function handleAddActivity(newActivity) {
+		newActivity = { ...newActivity, id: uid() };
+		setActivities([newActivity, ...activities]);
+	}
+
+	return (
+		<div className="App">
+			<Form onAddActivity={handleAddActivity}></Form>
+		</div>
+	);
 }
 
 export default App;
