@@ -1,0 +1,11 @@
+.list__item {
+  background-color: var(--primary-color);
+  border: var(--border);
+  padding: 10px;
+  color: white;
+  margin: 5px 0;
+}
+
+.list__item:hover {
+  background-color: color-mix(in srgb, var(--primary-color) 20%, white);
+}
