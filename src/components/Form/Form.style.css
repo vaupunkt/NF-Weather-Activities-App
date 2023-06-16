@@ -1,28 +1,27 @@
 .form {
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .form__header {
-	font-size: 1rem;
+  font-size: 1rem;
 }
 
 .form__row {
-	margin: auto;
-	display: flex;
-	width: 100%;
-	gap: 10px;
-	align-items: center;
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  align-items: center;
 }
 
 .form__input-text {
-	flex-grow: 1;
-	border-radius: 5px;
-	border: var(--border);
-	padding: 5px;
+  flex-grow: 1;
+  border-radius: 5px;
+  border: var(--border);
+  padding: 5px;
 }
 
 .form__input-checkbox {
-	margin: auto;
+  margin: auto;
 }
