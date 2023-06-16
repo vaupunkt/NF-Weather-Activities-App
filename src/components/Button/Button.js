@@ -1,5 +1,9 @@
 import "./Button.style.css";
 
 export default function Button({ children, type }) {
-	return <button type={type}>{children}</button>;
+	return (
+		<button className="button" type={type}>
+			{children}
+		</button>
+	);
 }
