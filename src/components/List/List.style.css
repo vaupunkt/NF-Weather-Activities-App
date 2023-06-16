@@ -1,17 +1,22 @@
 .list {
-  list-style: none;
-  overflow: auto;
-  max-height: 30vh;
+	list-style: none;
+	overflow: auto;
+	max-height: 30vh;
+	margin-top: 10px;
 }
 
 .list::-webkit-scrollbar {
-  width: 5px;
+	width: 5px;
 }
 
 .list::-webkit-scrollbar-track {
-  margin-left: 5px;
+	margin-left: 5px;
 }
 
 .list::-webkit-scrollbar-thumb {
-  background: darkgrey;
+	background: darkgrey;
+}
+
+.list__description {
+	line-height: 1.5;
 }
