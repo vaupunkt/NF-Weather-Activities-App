@@ -23,7 +23,7 @@ function App() {
     async function fetchWeather() {
       try {
         const response = await fetch(
-          "https://example-apis.vercel.app/api/weather"
+          "https://example-apis.vercel.app/api/weatherr"
         );
 
         if (response.ok) {
@@ -44,9 +44,14 @@ function App() {
   console.log("isGoodWeather:", isGoodWeather);
   //   isGoodWeather = weather.isGoodWeather;
 
-  const filteredActivities = activities.filter(
-    (activity) => activity.isForGoodWeather === isGoodWeather
-  );
+  let filteredActivities = [];
+  if (isGoodWeather) {
+    filteredActivities = activities.filter(
+      (activity) => activity.isForGoodWeather === isGoodWeather
+    );
+  } else {
+    filteredActivities = activities;
+  }
 
   return (
     <div className="App">
