@@ -3,3 +3,15 @@
   overflow: auto;
   max-height: 30vh;
 }
+
+.list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.list::-webkit-scrollbar-track {
+  margin-left: 5px;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background: darkgrey;
+}
