@@ -1,0 +1,9 @@
+.description__text {
+	line-height: 1.5;
+}
+
+.description__data {
+	display: flex;
+	justify-content: space-around;
+	font-size: 3rem;
+}
