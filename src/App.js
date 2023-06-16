@@ -7,61 +7,61 @@ import List from "./components/List/List";
 import Weather from "./components/Weather/Weather";
 
 function App() {
-	const [activities, setActivities] = useLocalStorageState("activities", {
-		defaultValue: [],
-	});
+  const [activities, setActivities] = useLocalStorageState("activities", {
+    defaultValue: [],
+  });
 
-	function handleAddActivity(newActivity) {
-		newActivity = { ...newActivity, id: uid() };
-		setActivities([newActivity, ...activities]);
-	}
+  function handleAddActivity(newActivity) {
+    newActivity = { ...newActivity, id: uid() };
+    setActivities([newActivity, ...activities]);
+  }
 
-	const [weather, setWeather] = useState({});
+  const [weather, setWeather] = useState({});
 
-	//const isGoodWeather = false;
-	useEffect(() => {
-		async function fetchWeather() {
-			try {
-				const response = await fetch(
-					"https://example-apis.vercel.app/api/weather/"
-				);
+  //const isGoodWeather = false;
+  useEffect(() => {
+    async function fetchWeather() {
+      try {
+        const response = await fetch(
+          "https://example-apis.vercel.app/api/weather/"
+        );
 
-				if (response.ok) {
-					const data = await response.json();
-					setWeather(data);
-				} else {
-					console.error("Data error");
-				}
-			} catch {
-				console.error("catch");
-			}
-		}
-		fetchWeather();
-	}, []);
+        if (response.ok) {
+          const data = await response.json();
+          setWeather(data);
+        } else {
+          console.error("Data error");
+        }
+      } catch {
+        console.error("catch");
+      }
+    }
+    fetchWeather();
+  }, []);
 
-	//   console.log(weather.isGoodWeather);
-	console.log("isGoodWeather:", weather.isGoodWeather);
-	//   isGoodWeather = weather.isGoodWeather;
+  //   console.log(weather.isGoodWeather);
+  console.log("isGoodWeather:", weather.isGoodWeather);
+  //   isGoodWeather = weather.isGoodWeather;
 
-	let filteredActivities = [];
-	if (weather.isGoodWeather || !weather.isGoodWeather) {
-		filteredActivities = activities.filter(
-			(activity) => activity.isForGoodWeather === weather.isGoodWeather
-		);
-	} else {
-		filteredActivities = activities;
-	}
+  let filteredActivities = [];
+  if (weather.isGoodWeather != null) {
+    filteredActivities = activities.filter(
+      (activity) => activity.isForGoodWeather === weather.isGoodWeather
+    );
+  } else {
+    filteredActivities = activities;
+  }
 
-	return (
-		<div className="App">
-			<Weather weather={weather} />
-			<List
-				activities={filteredActivities}
-				isGoodWeather={weather.isGoodWeather}
-			/>
-			<Form onAddActivity={handleAddActivity} />
-		</div>
-	);
+  return (
+    <div className="App">
+      <Weather weather={weather} />
+      <List
+        activities={filteredActivities}
+        isGoodWeather={weather.isGoodWeather}
+      />
+      <Form onAddActivity={handleAddActivity} />
+    </div>
+  );
 }
 
 export default App;
